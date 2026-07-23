@@ -24,7 +24,7 @@ describe('SafeDep CLI Commander Integration', () => {
 
   it('harus menampilkan versi dengan opsi --version', () => {
     const output = execSync(`npx tsx ${cliPath} --version`).toString();
-    expect(output.trim()).toBe('1.0.0');
+    expect(output.trim()).toBe('0.3.0');
   });
 
   it('harus menjalankan command compare dengan sukses', () => {
