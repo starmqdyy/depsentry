@@ -11,9 +11,9 @@ import packageJson from '../package.json';
 const program = new Command();
 
 program
-  .name('safedep')
+  .name('depsentry')
   .description('Dependency Risk Analyzer for Node.js')
-  .version(packageJson.version || '1.0.0', '-v, --version', 'Tampilkan versi SafeDep');
+  .version(packageJson.version || '0.3.0', '-v, --version', 'Tampilkan versi DepSentry');
 
 program
   .command('compare')

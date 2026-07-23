@@ -4,7 +4,7 @@ import { DependencyChange } from '../src/types';
 import fs from 'fs';
 import path from 'path';
 
-describe('SafeDep Report Module', () => {
+describe('DepSentry Report Module', () => {
   const testOutputPath = path.join(__dirname, 'temp-test-report.md');
 
   afterEach(() => {
@@ -43,9 +43,9 @@ describe('SafeDep Report Module', () => {
 
     const markdown = generateMarkdownReport('./package-old.json', './package-new.json', changes);
 
-    expect(markdown).toContain('# SafeDep Dependency Report');
+    expect(markdown).toContain('# DepSentry Dependency Report');
     expect(markdown).toContain('Created by starmqdyy');
-    expect(markdown).toContain('https://github.com/starmqdyy/safedep');
+    expect(markdown).toContain('https://github.com/starmqdyy/depsentry');
 
     expect(markdown).toContain('## Summary');
     expect(markdown).toContain('- **Total Changes**: 2');
@@ -70,7 +70,7 @@ describe('SafeDep Report Module', () => {
   it('harus menangani laporan dengan daftar perubahan kosong', () => {
     const markdown = generateMarkdownReport('./package-old.json', './package-new.json', []);
 
-    expect(markdown).toContain('# SafeDep Dependency Report');
+    expect(markdown).toContain('# DepSentry Dependency Report');
     expect(markdown).toContain('- **Total Changes**: 0');
     expect(markdown).toContain('No high risk changes detected.');
   });
@@ -93,7 +93,7 @@ describe('SafeDep Report Module', () => {
     expect(fs.existsSync(testOutputPath)).toBe(true);
 
     const fileContent = fs.readFileSync(testOutputPath, 'utf-8');
-    expect(fileContent).toContain('# SafeDep Dependency Report');
+    expect(fileContent).toContain('# DepSentry Dependency Report');
     expect(fileContent).toContain('### express');
   });
 });

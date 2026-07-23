@@ -39,9 +39,9 @@ export function generateMarkdownReport(
     }
   });
 
-  let md = `# SafeDep Dependency Report\n\n`;
+  let md = `# DepSentry Dependency Report\n\n`;
   md += `Created by starmqdyy  \n`;
-  md += `Repository: https://github.com/starmqdyy/safedep\n\n`;
+  md += `Repository: https://github.com/starmqdyy/depsentry\n\n`;
 
   md += `## Files\n`;
   md += `- **Old**: ${oldPath}\n`;

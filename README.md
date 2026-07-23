@@ -1,69 +1,180 @@
-# SafeDep 🛡️
+# DepSentry 🛡️
 
-**SafeDep** adalah CLI sederhana berbasis Node.js dan TypeScript untuk membandingkan dependency dari dua file `package.json` dan memberi tahu dependency yang **ditambahkan**, **dihapus**, atau **diperbarui**.
+**DepSentry** adalah CLI open-source berbasis Node.js dan TypeScript untuk membandingkan dua file `package.json` dan memprediksi risiko perubahan dependency (`HIGH`, `MEDIUM`, `LOW`, `UNKNOWN`) berbasis Semantic Versioning.
 
 ---
 
-## 📁 Struktur Project
+## 📦 Installation
+
+Instal DepSentry secara global menggunakan npm:
+
+```bash
+npm install -g @starmqdyy/depsentry
+```
+
+---
+
+## 🚀 Quick Start
+
+Bandingkan dua file `package.json` secara langsung di terminal:
+
+```bash
+depsentry compare package-old.json package-new.json
+```
+
+---
+
+## 🛠️ Commands
+
+### `depsentry --help`
+Tampilkan pesan bantuan dan daftar perintah yang tersedia.
+
+```bash
+depsentry --help
+```
+
+### `depsentry --version`
+Tampilkan versi DepSentry saat ini.
+
+```bash
+depsentry --version
+```
+
+### `depsentry compare <old-file> <new-file>`
+Bandingkan dua file `package.json` dan tampilkan analisis tingkat risikonya.
+
+```bash
+depsentry compare package-old.json package-new.json
+```
+
+---
+
+## ⚙️ Options
+
+- `-o, --output <file>` : Simpan hasil analisis perbandingan ke dalam file laporan berformat Markdown.
+
+Contoh penggunaan:
+
+```bash
+depsentry compare package-old.json package-new.json --output report.md
+```
+
+---
+
+## 📊 Example Output
+
+Hasil keluaran terminal berwarna:
 
 ```text
-safedep/
-├── src/
-│   ├── compare.ts      # Logika utama perbandingan package.json
-│   ├── types.ts        # Definisi interface dan TypeScript types
-│   └── index.ts        # Entry point aplikasi CLI
-├── tests/
-│   └── compare.test.ts # Unit test menggunakan Vitest
-├── examples/
-│   ├── package-old.json # Contoh file package.json versi lama
-│   └── package-new.json # Contoh file package.json versi baru
-├── package.json        # Konfigurasi project & dependensi npm
-├── tsconfig.json       # Konfigurasi kompilator TypeScript
-└── README.md           # Dokumentasi petunjuk penggunaan
+╭──────────────────────────────────────────────╮
+│                 DepSentry                    │
+│   Dependency Risk Analyzer for Node.js       │
+│                                              │
+│   Created by starmqdyy                       │
+│   github.com/starmqdyy/depsentry             │
+╰──────────────────────────────────────────────╯
+
+Files
+  Old  ./examples/package-old.json
+  New  ./examples/package-new.json
+
+Dependency Changes
+
+● MEDIUM  UPDATED  express
+  ^4.17.1 → ^4.18.2
+  dependencies · minor update
+
+● MEDIUM  REMOVED  lodash
+  ^4.17.21
+  dependencies
+
+● MEDIUM  ADDED    axios
+  ^1.6.0
+  dependencies
+
+● HIGH    UPDATED  typescript
+  ^4.9.5 → ^5.3.3
+  devDependencies · major update
+
+Risk Summary
+
+  HIGH       1
+  MEDIUM     5
+  LOW        0
+  UNKNOWN    0
+
+Total changes: 6
+
+DepSentry completed successfully.
 ```
 
 ---
 
-## 🛠️ Cara Menginstal Dependensi
+## 📝 Markdown Report
 
-Jalankan perintah berikut di terminal:
+Jika kamu menambahkan opsi `--output report.md`, DepSentry akan membuat laporan Markdown murni (tanpa kode warna ANSI) beserta rekomendasi penanganan:
+
+```markdown
+# DepSentry Dependency Report
+
+Created by starmqdyy  
+Repository: https://github.com/starmqdyy/depsentry
+
+## Files
+- **Old**: package-old.json
+- **New**: package-new.json
+
+## Summary
+- **Total Changes**: 6
+- **HIGH Risk**: 1
+- **MEDIUM Risk**: 5
+- **LOW Risk**: 0
+- **UNKNOWN Risk**: 0
+
+## High Risk
+### typescript
+- **Status**: UPDATED
+- **Version**: `^4.9.5` → `^5.3.3`
+- **Section**: `devDependencies` (major update)
+- **Risk Level**: HIGH
+- **Recommendation**: Review breaking changes and run all tests before updating.
+```
+
+---
+
+## 💻 Development
+
+Jika kamu ingin berkontribusi atau mengembangkan project ini secara lokal:
 
 ```bash
+# Clone repository
+git clone https://github.com/starmqdyy/depsentry.git
+cd depsentry
+
+# Install dependensi
 npm install
-```
 
----
-
-## 🧪 Cara Menjalankan Unit Test
-
-Aplikasi ini menggunakan **Vitest** untuk pengujian otomatis:
-
-```bash
+# Menjalankan unit test (Vitest)
 npm test
+
+# Kompilasi TypeScript ke folder dist/
+npm run build
+
+# Uji coba secara lokal menggunakan npm link
+npm link
+depsentry compare ./examples/package-old.json ./examples/package-new.json
 ```
 
 ---
 
-## 🚀 Cara Menjalankan Aplikasi
+## 👤 Author
 
-Kamu dapat menjalankan aplikasi dengan perintah `npm start` diikuti oleh lokasi dua file `package.json` yang ingin dibandingkan:
-
-```bash
-npm start -- ./examples/package-old.json ./examples/package-new.json
-```
-
-Atau menggunakan `npx tsx`:
-
-```bash
-npx tsx src/index.ts ./examples/package-old.json ./examples/package-new.json
-```
+**starmqdyy**
+- GitHub: [github.com/starmqdyy](https://github.com/starmqdyy)
+- Repository: [github.com/starmqdyy/depsentry](https://github.com/starmqdyy/depsentry)
 
 ---
 
-## 📄 Penjelasan Singkat File Project
+## 📜 License
 
-1. **`src/types.ts`**: Menyimpan tipe data TypeScript (interface) agar struktur data perubahan dependency dan package.json konsisten.
-2. **`src/compare.ts`**: Berisi fungsi pemroses data seperti membaca file JSON, membandingkan `dependencies` & `devDependencies`, serta penanganan error jika file hilang atau JSON tidak valid.
-3. **`src/index.ts`**: Menangani argumen dari terminal CLI, memanggil fungsi perbandingan, dan menampilkan hasil perbandingan ke layar.
-4. **`tests/compare.test.ts`**: Pengujian otomatis untuk memastikan semua logika pembandingan dan penanganan error berjalan sesuai kriteria.
-5. **`examples/package-old.json` & `package-new.json`**: File contoh untuk mencoba aplikasi langsung.
+Project ini dilindungi oleh lisensi [MIT](LICENSE).

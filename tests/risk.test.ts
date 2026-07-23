@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { calculateRisk } from '../src/risk';
 
-describe('SafeDep Risk Assessment Module', () => {
+describe('DepSentry Risk Assessment Module', () => {
   it('patch update harus menghasilkan risk LOW dan versionChange patch', () => {
     const result = calculateRisk('updated', '1.2.3', '1.2.4');
     expect(result).toEqual({ risk: 'LOW', versionChange: 'patch' });

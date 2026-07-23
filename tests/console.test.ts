@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { calculateRiskSummary } from '../src/console';
 import { DependencyChange } from '../src/types';
 
-describe('SafeDep Console Summary Module', () => {
+describe('DepSentry Console Summary Module', () => {
   it('harus menghitung jumlah setiap kategori risiko dengan benar', () => {
     const changes: DependencyChange[] = [
       { name: 'a', type: 'updated', section: 'dependencies', risk: 'HIGH', versionChange: 'major' },

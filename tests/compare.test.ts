@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { compareDependencies, comparePackages, readPackageJson } from '../src/compare';
 import path from 'path';
 
-describe('SafeDep Compare Module', () => {
+describe('DepSentry Compare Module', () => {
   describe('compareDependencies()', () => {
     it('harus mendeteksi dependency yang ditambahkan', () => {
       const oldDeps = {};

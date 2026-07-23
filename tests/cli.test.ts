@@ -3,7 +3,7 @@ import { execSync } from 'child_process';
 import path from 'path';
 import fs from 'fs';
 
-describe('SafeDep CLI Commander Integration', () => {
+describe('DepSentry CLI Commander Integration', () => {
   const cliPath = path.join(__dirname, '../src/index.ts');
   const oldPkg = path.join(__dirname, '../examples/package-old.json');
   const newPkg = path.join(__dirname, '../examples/package-new.json');
@@ -17,7 +17,7 @@ describe('SafeDep CLI Commander Integration', () => {
 
   it('harus menampilkan pesan bantuan dengan opsi --help', () => {
     const output = execSync(`npx tsx ${cliPath} --help`).toString();
-    expect(output).toContain('Usage: safedep [options] [command]');
+    expect(output).toContain('Usage: depsentry [options] [command]');
     expect(output).toContain('Dependency Risk Analyzer for Node.js');
     expect(output).toContain('compare');
   });
@@ -29,7 +29,7 @@ describe('SafeDep CLI Commander Integration', () => {
 
   it('harus menjalankan command compare dengan sukses', () => {
     const output = execSync(`npx tsx ${cliPath} compare ${oldPkg} ${newPkg}`).toString();
-    expect(output).toContain('SafeDep');
+    expect(output).toContain('DepSentry');
     expect(output).toContain('Dependency Changes');
     expect(output).toContain('Total changes: 6');
   });
@@ -43,7 +43,7 @@ describe('SafeDep CLI Commander Integration', () => {
     expect(fs.existsSync(tempReport)).toBe(true);
 
     const reportContent = fs.readFileSync(tempReport, 'utf-8');
-    expect(reportContent).toContain('# SafeDep Dependency Report');
+    expect(reportContent).toContain('# DepSentry Dependency Report');
   });
 
   it('harus menampilkan error jika argumen file kurang', () => {
