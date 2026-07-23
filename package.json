@@ -1,12 +1,14 @@
 {
   "name": "safedep",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "CLI sederhana untuk membandingkan dependency dari dua file package.json",
   "main": "dist/index.js",
+  "bin": {
+    "safedep": "dist/index.js"
+  },
   "scripts": {
-    "dev": "tsx src/index.ts",
     "build": "tsc",
-    "start": "node dist/index.js",
+    "start": "tsx src/index.ts",
     "test": "vitest run"
   },
   "keywords": [
@@ -17,17 +19,16 @@
   ],
   "author": "",
   "license": "MIT",
-  "devDependencies": {
-    "@types/node": "^20.19.43",
-    "@types/semver": "^7.7.1",
-    "tsup": "^8.5.1",
-    "tsx": "^4.23.1",
-    "typescript": "^5.9.3",
-    "vitest": "^1.6.1"
-  },
   "dependencies": {
     "chalk": "^4.1.2",
-    "commander": "^15.0.0",
-    "semver": "^7.8.5"
+    "commander": "^12.0.0",
+    "semver": "^7.5.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/semver": "^7.5.6",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3",
+    "vitest": "^1.2.0"
   }
 }
