@@ -1,13 +1,14 @@
 {
   "name": "safedep",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "CLI sederhana untuk membandingkan dependency dari dua file package.json",
   "main": "src/index.ts",
   "scripts": {
-    "build": "tsc",
-    "start": "tsx src/index.ts",
-    "test": "vitest run"
-  },
+  "dev": "tsx src/index.ts",
+  "build": "tsc",
+  "start": "tsx src/index.ts",
+  "test": "vitest run"
+}
   "keywords": [
     "cli",
     "dependencies",
